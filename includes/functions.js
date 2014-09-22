@@ -418,16 +418,14 @@ function setUpNotification(now, hora, wday, tday, savedNotification){
                 _alarm.setSeconds(0);
             }
         }else if(wday > tday){
-            //setear en fecha + tday-wday
             _alarm = new Date();
-            _alarm.setDate(_alarm.getDate()+wday - tday);
+            _alarm.setDate(_alarm.getDate()+tday - wday +7);
             _alarm.setHours(tsplit[0]);
             _alarm.setMinutes(tsplit[1]);
             _alarm.setSeconds(0);
         }else{
-            //wday - tday +7
             _alarm = new Date();
-            _alarm.setDate(_alarm.getDate()+wday - tday +7);
+            _alarm.setDate(_alarm.getDate()+tday - wday);
             _alarm.setHours(tsplit[0]);
             _alarm.setMinutes(tsplit[1]);
             _alarm.setSeconds(0);
