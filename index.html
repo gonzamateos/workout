@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Workout</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="jqmobile/jquery.mobile-1.4.3.min.css" />
+    <link href="includes/styles.css" rel="stylesheet" type="text/css"/>
+    <link href="fonts/roboto.css" rel="stylesheet" type="text/css"/>
+    
+    <script src="jqmobile/jquery.min.js"></script>
+    <script src="jqmobile/jquery.mobile-1.4.3.min.js"></script>
+    <script src="jqmobile/jquery.mobile.simpledialog.min.js" type="text/javascript"></script>
+    <link href="jqmobile/jquery.mobile.simpledialog.css" rel="stylesheet" type="text/css"/>
+    
+    <script src="phonegap.js" type="text/javascript"></script>
+    <script src="includes/dbcontroller.js" type="text/javascript"></script>
+    <script src="includes/workouts.js" type="text/javascript"></script>
+    <script src="includes/functions.js" type="text/javascript"></script>
+    <script src="includes/init.js" type="text/javascript"></script>
+</head>
+<body>
+
+<div data-role="page" id="home" class="mypage">
+
+	<div data-role="header">
+		<h1>Workout HomePRO</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+            <p><img src="images/profile/default.png" alt="Foto" /></p>
+            <p class="profile-name">Workout</p>
+            <p class="profile-level">Level 1</p>
+	</div><!-- /content -->
+
+	<div class="loadmenu">
+	</div><!-- /footer -->
+</div><!-- /page -->
+
+<div data-role="page" id="profile" class="mypage">
+
+	<div data-role="header">
+		<h1>Options</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+            <form>
+                <div class="input text">
+                    <label for="profile-name">Name</label>
+                    <input type="text" id="profile-name" name="profile-name" value="" />
+                </div>
+                <div class="input">
+                    <label for="profile-age">Age</label>
+                    <input type="number" id="profile-age" name="profile-age" value="18" />
+                </div>
+                <div class="input">
+                    <label for="profile-level">Level</label>
+                    <select name="profile-level" id="profile-level">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </div>
+                <div class="input text">
+                    <a href="#nogo" data-role="button" data-theme="b" id="profile-submit" name="profile-submit">Save</a>
+                </div>
+            </form>
+	</div><!-- /content -->
+
+	<div class="loadmenu">
+	</div><!-- /footer -->
+</div><!-- /page -->
+
+<div data-role="page" id="set-notification" class="mypage">
+
+	<div data-role="header" data-position="fixed">
+		<h1>Notifications</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+            <ul class="notifications">
+                <li class="row-a">
+                    <input type="hidden" name="notification-monday-time" class="notification-time"  id="notification-monday-time" value="00:00" />
+                    <input type="hidden" name="notification-monday-on" class="active" id="notification-monday-on" value="0" />
+                    <a href="#nogo" class="set-time off">Monday <span class="time">00:00hs</span></a>
+                    <a href="#nogo" class="activate off"><img src="images/icons/clock15-crop.png" alt="Activate" /></a>
+                </li>
+                <li class="row-b">
+                    <input type="hidden" name="notification-tuesday-time" class="notification-time"  id="notification-tuesday-time" value="00:00" />
+                    <input type="hidden" name="notification-tuesday-on" class="active" id="notification-tuesday-on" value="0" />
+                    <a href="#nogo" class="set-time on">Tuesday <span class="time">00:00hs</span></a>
+                    <a href="#nogo" class="activate on"><img src="images/icons/clock15-crop.png" alt="Activate" /></a>
+                </li>
+                <li class="row-c">
+                    <input type="hidden" name="notification-wednesday-time" class="notification-time"  id="notification-wednesday-time" value="00:00" />
+                    <input type="hidden" name="notification-wednesday-on" class="active" id="notification-wednesday-on" value="0" />
+                    <a href="#nogo" class="set-time off">Wednesday <span class="time">00:00hs</span></a>
+                    <a href="#nogo" class="activate off"><img src="images/icons/clock15-crop.png" alt="Activate" /></a>
+                </li>
+                <li class="row-d">
+                    <input type="hidden" name="notification-thursday-time" class="notification-time"  id="notification-thursday-time" value="00:00" />
+                    <input type="hidden" name="notification-thursday-on" class="active" id="notification-thursday-on" value="0" />
+                    <a href="#nogo" class="set-time off">Thursday <span class="time">00:00hs</span></a>
+                    <a href="#nogo" class="activate off"><img src="images/icons/clock15-crop.png" alt="Activate" /></a>
+                </li>
+                <li class="row-e">
+                    <input type="hidden" name="notification-friday-time" class="notification-time"  id="notification-friday-time" value="00:00" />
+                    <input type="hidden" name="notification-friday-on" class="active" id="notification-friday-on" value="0" />
+                    <a href="#nogo" class="set-time off">Friday <span class="time">00:00hs</span></a>
+                    <a href="#nogo" class="activate off"><img src="images/icons/clock15-crop.png" alt="Activate" /></a>
+                </li>
+                <li class="row-f">
+                    <input type="hidden" name="notification-saturday-time" class="notification-time"  id="notification-saturday-time" value="00:00" />
+                    <input type="hidden" name="notification-saturday-on" class="active" id="notification-saturday-on" value="0" />
+                    <a href="#nogo" class="set-time off">Saturday <span class="time">00:00hs</span></a>
+                    <a href="#nogo" class="activate off"><img src="images/icons/clock15-crop.png" alt="Activate" /></a>
+                </li>
+                <li class="row-g">
+                    <input type="hidden" name="notification-sunday-time" class="notification-time"  id="notification-sunday-time" value="00:00" />
+                    <input type="hidden" name="notification-sunday-on" class="active" id="notification-sunday-on" value="0" />
+                    <a href="#nogo" class="set-time off">Sunday <span class="time">00:00hs</span></a>
+                    <a href="#nogo" class="activate off"><img src="images/icons/clock15-crop.png" alt="Activate" /></a>
+                </li>
+            </ul>
+            <div id="notification-popup" style="display: none;">
+                <div class="popup-box">
+                    <h2>Set time:</h2>
+                    <input type="text" name="notification-popup-time" id="notification-popup-time" value="" />
+                    <input type="hidden" name="notification-caller" id="notification-caller" value="" />
+                    <button type="button" onclick="saveNotificationTime()">Save</button>
+                    <button type="button" data-theme="b" onclick="closeNotificationPopup()">Cancel</button>
+                </div>
+            </div>
+	</div><!-- /content -->
+
+	<div class="loadmenu">
+	</div><!-- /footer -->
+</div><!-- /page -->
+
+<div data-role="page" id="workout" class="mypage">
+
+	<div data-role="header">
+		<h1>Workout HomePRO</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+            <table cellpadding="0" cellspacing="0" border="collapse">
+                <tr>
+                    <td width="8%" class="prev"><a href="#nogo" class="prev">Prev &lt;</a></td>
+                    <td width="84%"><video autoplay="autoplay" id="wvideo"><source src="videos/abs/1.m4v" /></video></td>
+                    <td width="8%" class="next"><a href="#nogo" class="next">Next &gt;</a></td>
+                </tr>
+            </table>
+            <p id="sets">3 Sets</p>
+            <p id="reps">5 Reps</p>
+            <div class="explanation">
+                <h2>Abdominales</h2>
+                <ol>
+                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                    <li>Donec lacinia eros in odio suscipit cursus.</li>
+                    <li>Sed vestibulum enim sed est consectetur, auctor euismod erat tempor.</li>
+                </ol>
+            </div>
+	</div><!-- /content -->
+
+        <div class="loadmenu">
+	</div><!-- /footer -->
+</div><!-- /page -->
+
+<div data-role="page" id="congratulations" class="mypage">
+
+	<div data-role="header">
+		<h1>Congratulation!</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+            <h2>You have finished the workout for today!</h2>
+            <p>Look at your statistics!</p>
+	</div><!-- /content -->
+
+        <div class="loadmenu">
+	</div><!-- /footer -->
+</div><!-- /page -->
+
+<div data-role="page" id="statistics-sesion" class="mypage statistics">
+
+	<div data-role="header">
+		<h1>Statistics</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+            <h3>Session time</h3>
+            <p>25<span class="unit">.min</span></p>
+            <h3>Calories burned</h3>
+            <p>300<span class="unit">.Cal</span></p>
+	</div><!-- /content -->
+
+        <div class="loadmenu">
+	</div><!-- /footer -->
+</div><!-- /page -->
+
+<div data-role="page" id="statistics-week" class="mypage statistics">
+
+	<div data-role="header">
+		<h1>Statistics</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+            <h3>Week total time</h3>
+            <p>57<span class="unit">.min</span></p>
+            <h3>Calories burned</h3>
+            <p>620<span class="unit">.Cal</span></p>
+	</div><!-- /content -->
+
+        <div class="loadmenu">
+	</div><!-- /footer -->
+</div><!-- /page -->
+<div data-role="page" id="statistics-month" class="mypage statistics">
+
+	<div data-role="header">
+		<h1>Statistics</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+            <h3>Month total time</h3>
+            <p>03:16<span class="unit">.hs</span></p>
+            <h3>Calories burned</h3>
+            <p>2361<span class="unit">.Cal</span></p>
+	</div><!-- /content -->
+
+        <div class="loadmenu">
+	</div><!-- /footer -->
+</div><!-- /page -->
+
+<div data-role="page" id="statistics-total" class="mypage statistics">
+
+	<div data-role="header">
+		<h1>Statistics</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+            <h3>Total time</h3>
+            <p>06:24<span class="unit">.hs</span></p>
+            <h3>Calories burned</h3>
+            <p>4987<span class="unit">.Cal</span></p>
+	</div><!-- /content -->
+
+        <div class="loadmenu">
+	</div><!-- /footer -->
+</div><!-- /page -->
+<div data-role="page" id="tips" class="mypage">
+
+	<div data-role="header">
+		<h1>Tips</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content text">
+	</div><!-- /content -->
+
+        <div class="loadmenu">
+	</div><!-- /footer -->
+</div><!-- /page -->
+
+<div data-role="page" id="motivation-quotes" class="mypage">
+
+	<div data-role="header">
+		<h1>Motivation Quotes</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+            <div class="quotes"></div>
+            <p><a href="#nogo" id="motivationrefresh" class="refresh">Refresh</a></p>
+	</div><!-- /content -->
+
+        <div class="loadmenu">
+	</div><!-- /footer -->
+</div><!-- /page -->
+
+<div data-role="page" id="motivation-quotes" class="mypage">
+
+	<div data-role="header">
+		<h1>Motivation Quotes</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+            <div class="quotes"></div>
+            <p><a href="#nogo" class="refresh">Refresh</a></p>
+	</div><!-- /content -->
+
+        <div class="loadmenu">
+            
+	</div><!-- /footer -->
+</div><!-- /page -->
+
+<div data-role="page" id="about" class="mypage">
+
+	<div data-role="header">
+		<h1>Workout HomePRO</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content text">
+            <p>Nunc tempor quam nec ipsum rhoncus, nec vulputate dolor convallis. Donec ut ante bibendum, tempor massa congue, tempus mi. Ut malesuada varius dignissim. Sed nec blandit nulla, in luctus lorem. Donec ornare nulla id eros facilisis, id gravida est ornare. Mauris vitae libero quis metus feugiat aliquet. Ut ullamcorper magna ut consectetur consectetur. Quisque urna est, ornare id dignissim et, scelerisque eu est. Nullam eu sagittis nibh. Maecenas sed viverra urna, at pulvinar quam.</p>
+            <p>Donec eu felis in tellus pretium pulvinar at eu augue. Fusce sed nibh id lorem commodo adipiscing ac eu nisl. Duis non suscipit mi, interdum condimentum nisl. Phasellus blandit sit amet nibh ac auctor. Nam in orci urna. Sed venenatis purus ut tellus vehicula pharetra. Ut luctus pretium turpis, eu adipiscing metus rutrum et. In dignissim risus ut augue sagittis, eget consectetur lorem consectetur. Praesent pharetra aliquet elit ut molestie. Integer venenatis, neque sed consequat imperdiet, orci arcu mattis ipsum, posuere rutrum ante purus ut dolor. Sed sed dui lacinia metus blandit semper. Curabitur laoreet euismod tempor. Proin eget urna posuere, fermentum dolor ut, pretium justo.</p>
+            <p>Maecenas volutpat congue sem, vitae vestibulum justo lobortis ac. Praesent viverra eu turpis non rutrum. Curabitur nunc ante, varius in porta et, tristique sit amet nisl. Maecenas scelerisque feugiat urna, et fermentum libero fringilla ut. Vivamus sem dui, vehicula non porta ut, euismod quis diam. Sed tincidunt dolor tempor, iaculis sem a, viverra nibh. Sed in massa venenatis, lacinia quam non, pellentesque erat.</p>
+	</div><!-- /content -->
+
+        <div class="loadmenu">
+	</div><!-- /footer -->
+</div><!-- /page -->
+<div data-role="page" id="reset-progress" class="mypage">
+
+	<div data-role="header">
+		<h1>Reset Progress</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content text">
+            <center>
+                <h2>Your progress records will be permanently removed from the system. Are you sure you want to delete?</h2>
+                <a id="btnCancel" href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c">Cancel</a>
+                <a id="btnOK" href="#" data-role="button" data-inline="true" data-theme="b" data-rel="back" data-transition="flow" >OK</a>
+            </center>
+	</div><!-- /content -->
+
+        <div class="loadmenu">
+	</div><!-- /footer -->
+</div><!-- /page -->
+
+
+<!-- popups-->
+<div id="popup">
+    <div class="box">
+        <a href="#" class="close">Close</a>
+        <div id="popup-message">
+        </div>
+    </div>
+</div>
+</body>
+</html>
