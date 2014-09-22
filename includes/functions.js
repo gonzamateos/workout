@@ -374,372 +374,73 @@ function saveNotifications(){
         sunday: { time: $('#notification-sunday-time').val(), on: $('#notification-sunday-on').val()}
     }
     window.localStorage.setItem("notifications", JSON.stringify(notifications));
-    setUpNotification();
+    setUpNotifications();
 }
-function setUpNotification(){
-    alert('setUpNotification()');
-    var tday= 0;
-    var now = new Date().getTime(),
+function setUpNotifications(){
+    var now = new Date(),
         wday= now.getDay();
-    var alarm = null;
-    var tsplit = null;
+    var hs = now.getHours();
+    if(hs<10){
+        hs = '0'+hs;
+    }
+    var mn = now.getMinutes();
+    if(mn<10){
+        mn = '0'+mn;
+    }
+    var hora = hs+':'+mn;
     window.plugin.notification.local.cancelAll();
-    //Domingo
-    if(notifications.sunday.on*1 == 1){
-        tday= 0;
-        alert(tday);
-        tsplit = notifications.sunday.time.split(':');
+
+    setUpNotification(now, hora, wday, 0, notifications.sunday);
+    setUpNotification(now, hora, wday, 1, notifications.monday);
+    setUpNotification(now, hora, wday, 2, notifications.tuesday);
+    setUpNotification(now, hora, wday, 3, notifications.wednesday);
+    setUpNotification(now, hora, wday, 4, notifications.thursday);
+    setUpNotification(now, hora, wday, 5, notifications.friday);
+    setUpNotification(now, hora, wday, 6, notifications.saturday);
+}
+function setUpNotification(now, hora, wday, tday, savedNotification){
+    var _alarm = null;
+    if(savedNotification.on == '1'){
+        var tsplit = savedNotification.time.split(':');
         if(wday == tday){
-            var hs = now.getHours();
-            if(hs<10){
-                hs = '0'+hs;
-            }
-            var mn = now.getMinutes();
-            if(mn<10){
-                mn = '0'+mn;
-            }
-            var hora = hs+':'+mn;
-            if(hora>notifications.monday.time){
+            if(hora>savedNotification.time){
                 //setear en 7 dias
-                alarm = new Date(now + 7 * 86400000);
-                alarm.setHours(tsplit[0]);
-                alarm.setMinutes(tsplit[1]);
-                alarm.setSecconds(0);
+                _alarm = new Date();
+                _alarm.setDate(_alarm.getDate()+7);
+                _alarm.setHours(tsplit[0]);
+                _alarm.setMinutes(tsplit[1]);
+                _alarm.setSeconds(0);
             }else{
                 //setear hoy
-                alarm = new Date();
-                alarm.setHours(tsplit[0]);
-                alarm.setMinutes(tsplit[1]);
-                alarm.setSecconds(0);
+                _alarm = new Date();
+                _alarm.setHours(tsplit[0]);
+                _alarm.setMinutes(tsplit[1]);
+                _alarm.setSeconds(0);
             }
         }else if(wday > tday){
             //setear en fecha + tday-wday
-            alarm = new Date(now  + ((tday - wday) * 86400000));
-            alarm.setHours(tsplit[0]);
-            alarm.setMinutes(tsplit[1]);
-            alarm.setSecconds(0);
+            _alarm = new Date();
+            _alarm.setDate(_alarm.getDate()+wday - tday);
+            _alarm.setHours(tsplit[0]);
+            _alarm.setMinutes(tsplit[1]);
+            _alarm.setSeconds(0);
         }else{
             //wday - tday +7
-            alarm = new Date(now  + ((tday - wday) * 86400000));
-            alarm.setHours(tsplit[0]);
-            alarm.setMinutes(tsplit[1]);
-            alarm.setSecconds(0);
+            _alarm = new Date();
+            _alarm.setDate(_alarm.getDate()+wday - tday +7);
+            _alarm.setHours(tsplit[0]);
+            _alarm.setMinutes(tsplit[1]);
+            _alarm.setSeconds(0);
         }
         var row = Math.floor(Math.random() * quotesCant) + 1;
-        alert(alarm.toJSON());
+        alert('setted: '+tday+' > '+_alarm.toLocaleString()+' > '+$('#motivation-quotes .ui-content .quotes p#quote-'+row).text())
         window.plugin.notification.local.add({
             id:      tday,
             title:   'Workout',
             message: $('#motivation-quotes .ui-content .quotes p#quote-'+row).text(),
             repeat:  'weekly',
-            date:    alarm
-        }); 
-    }
-    //Lunes
-    if(notifications.monday.on*1 == 1){
-        tday= 1;
-        alert(tday);
-        tsplit = notifications.monday.time.split(':');
-        if(wday == tday){
-            var hs = now.getHours();
-            if(hs<10){
-                hs = '0'+hs;
-            }
-            var mn = now.getMinutes();
-            if(mn<10){
-                mn = '0'+mn;
-            }
-            var hora = hs+':'+mn;
-            if(hora>notifications.monday.time){
-                //setear en 7 dias
-                alarm = new Date(now + 7 * 86400000);
-                alarm.setHours(tsplit[0]);
-                alarm.setMinutes(tsplit[1]);
-                alarm.setSecconds(0);
-            }else{
-                //setear hoy
-                alarm = new Date();
-                alarm.setHours(tsplit[0]);
-                alarm.setMinutes(tsplit[1]);
-                alarm.setSecconds(0);
-            }
-        }else if(wday > tday){
-            //setear en fecha + tday-wday
-            alarm = new Date(now  + ((tday - wday) * 86400000));
-            alarm.setHours(tsplit[0]);
-            alarm.setMinutes(tsplit[1]);
-            alarm.setSecconds(0);
-        }else{
-            //wday - tday +7
-            alarm = new Date(now  + ((tday - wday) * 86400000));
-            alarm.setHours(tsplit[0]);
-            alarm.setMinutes(tsplit[1]);
-            alarm.setSecconds(0);
-        }
-        var row = Math.floor(Math.random() * quotesCant) + 1;
-        alert(alarm.toJSON());
-        window.plugin.notification.local.add({
-            id:      tday,
-            title:   'Workout',
-            message: $('#motivation-quotes .ui-content .quotes p#quote-'+row).text(),
-            repeat:  'weekly',
-            date:    alarm
-        }); 
-    }
-    //martes
-    if(notifications.tuesday.on*1 == 1){
-        tday= 2;
-        alert(tday);
-        tsplit = notifications.tuesday.time.split(':');
-        if(wday == tday){
-            var hs = now.getHours();
-            if(hs<10){
-                hs = '0'+hs;
-            }
-            var mn = now.getMinutes();
-            if(mn<10){
-                mn = '0'+mn;
-            }
-            var hora = hs+':'+mn;
-            if(hora>notifications.monday.time){
-                //setear en 7 dias
-                alarm = new Date(now + 7 * 86400000);
-                alarm.setHours(tsplit[0]);
-                alarm.setMinutes(tsplit[1]);
-                alarm.setSecconds(0);
-            }else{
-                //setear hoy
-                alarm = new Date();
-                alarm.setHours(tsplit[0]);
-                alarm.setMinutes(tsplit[1]);
-                alarm.setSecconds(0);
-            }
-        }else if(wday > tday){
-            //setear en fecha + tday-wday
-            alarm = new Date(now  + ((tday - wday) * 86400000));
-            alarm.setHours(tsplit[0]);
-            alarm.setMinutes(tsplit[1]);
-            alarm.setSecconds(0);
-        }else{
-            //wday - tday +7
-            alarm = new Date(now  + ((tday - wday) * 86400000));
-            alarm.setHours(tsplit[0]);
-            alarm.setMinutes(tsplit[1]);
-            alarm.setSecconds(0);
-        }
-        var row = Math.floor(Math.random() * quotesCant) + 1;
-        alert(alarm.toJSON());
-        window.plugin.notification.local.add({
-            id:      tday,
-            title:   'Workout',
-            message: $('#motivation-quotes .ui-content .quotes p#quote-'+row).text(),
-            repeat:  'weekly',
-            date:    alarm
-        }); 
-    }
-    //Miercoles
-    if(notifications.wednesday.on*1 == 1){
-        tday= 3;
-        alert(tday);
-        tsplit = notifications.wednesday.time.split(':');
-        if(wday == tday){
-            var hs = now.getHours();
-            if(hs<10){
-                hs = '0'+hs;
-            }
-            var mn = now.getMinutes();
-            if(mn<10){
-                mn = '0'+mn;
-            }
-            var hora = hs+':'+mn;
-            if(hora>notifications.monday.time){
-                //setear en 7 dias
-                alarm = new Date(now + 7 * 86400000);
-                alarm.setHours(tsplit[0]);
-                alarm.setMinutes(tsplit[1]);
-                alarm.setSecconds(0);
-            }else{
-                //setear hoy
-                alarm = new Date();
-                alarm.setHours(tsplit[0]);
-                alarm.setMinutes(tsplit[1]);
-                alarm.setSecconds(0);
-            }
-        }else if(wday > tday){
-            //setear en fecha + tday-wday
-            alarm = new Date(now  + ((tday - wday) * 86400000));
-            alarm.setHours(tsplit[0]);
-            alarm.setMinutes(tsplit[1]);
-            alarm.setSecconds(0);
-        }else{
-            //wday - tday +7
-            alarm = new Date(now  + ((tday - wday) * 86400000));
-            alarm.setHours(tsplit[0]);
-            alarm.setMinutes(tsplit[1]);
-            alarm.setSecconds(0);
-        }
-        var row = Math.floor(Math.random() * quotesCant) + 1;
-        alert(alarm.toJSON());
-        window.plugin.notification.local.add({
-            id:      tday,
-            title:   'Workout',
-            message: $('#motivation-quotes .ui-content .quotes p#quote-'+row).text(),
-            repeat:  'weekly',
-            date:    alarm
-        }); 
-    }
-    //Jueves
-    if(notifications.thursday.on*1 == 1){
-        tday= 4;
-        alert(tday);
-        tsplit = notifications.thursday.time.split(':');
-        if(wday == tday){
-            var hs = now.getHours();
-            if(hs<10){
-                hs = '0'+hs;
-            }
-            var mn = now.getMinutes();
-            if(mn<10){
-                mn = '0'+mn;
-            }
-            var hora = hs+':'+mn;
-            if(hora>notifications.monday.time){
-                //setear en 7 dias
-                alarm = new Date(now + 7 * 86400000);
-                alarm.setHours(tsplit[0]);
-                alarm.setMinutes(tsplit[1]);
-                alarm.setSecconds(0);
-            }else{
-                //setear hoy
-                alarm = new Date();
-                alarm.setHours(tsplit[0]);
-                alarm.setMinutes(tsplit[1]);
-                alarm.setSecconds(0);
-            }
-        }else if(wday > tday){
-            //setear en fecha + tday-wday
-            alarm = new Date(now  + ((tday - wday) * 86400000));
-            alarm.setHours(tsplit[0]);
-            alarm.setMinutes(tsplit[1]);
-            alarm.setSecconds(0);
-        }else{
-            //wday - tday +7
-            alarm = new Date(now  + ((tday - wday) * 86400000));
-            alarm.setHours(tsplit[0]);
-            alarm.setMinutes(tsplit[1]);
-            alarm.setSecconds(0);
-        }
-        var row = Math.floor(Math.random() * quotesCant) + 1;
-        alert(alarm.toJSON());
-        window.plugin.notification.local.add({
-            id:      tday,
-            title:   'Workout',
-            message: $('#motivation-quotes .ui-content .quotes p#quote-'+row).text(),
-            repeat:  'weekly',
-            date:    alarm
-        }); 
-    }
-    //Viernes
-    if(notifications.friday.on*1 == 1){
-        tday= 5;
-        alert(tday);
-        tsplit = notifications.friday.time.split(':');
-        if(wday == tday){
-            var hs = now.getHours();
-            if(hs<10){
-                hs = '0'+hs;
-            }
-            var mn = now.getMinutes();
-            if(mn<10){
-                mn = '0'+mn;
-            }
-            var hora = hs+':'+mn;
-            if(hora>notifications.monday.time){
-                //setear en 7 dias
-                alarm = new Date(now + 7 * 86400000);
-                alarm.setHours(tsplit[0]);
-                alarm.setMinutes(tsplit[1]);
-                alarm.setSecconds(0);
-            }else{
-                //setear hoy
-                alarm = new Date();
-                alarm.setHours(tsplit[0]);
-                alarm.setMinutes(tsplit[1]);
-                alarm.setSecconds(0);
-            }
-        }else if(wday > tday){
-            //setear en fecha + tday-wday
-            alarm = new Date(now  + ((tday - wday) * 86400000));
-            alarm.setHours(tsplit[0]);
-            alarm.setMinutes(tsplit[1]);
-            alarm.setSecconds(0);
-        }else{
-            //wday - tday +7
-            alarm = new Date(now  + ((tday - wday) * 86400000));
-            alarm.setHours(tsplit[0]);
-            alarm.setMinutes(tsplit[1]);
-            alarm.setSecconds(0);
-        }
-        var row = Math.floor(Math.random() * quotesCant) + 1;
-        alert(alarm.toJSON());
-        window.plugin.notification.local.add({
-            id:      tday,
-            title:   'Workout',
-            message: $('#motivation-quotes .ui-content .quotes p#quote-'+row).text(),
-            repeat:  'weekly',
-            date:    alarm
-        }); 
-    }
-    //Sabado
-    if(notifications.saturday.on*1 == 1){
-        tday= 6;
-        alert(tday);
-        tsplit = notifications.saturnday.time.split(':');
-        if(wday == tday){
-            var hs = now.getHours();
-            if(hs<10){
-                hs = '0'+hs;
-            }
-            var mn = now.getMinutes();
-            if(mn<10){
-                mn = '0'+mn;
-            }
-            var hora = hs+':'+mn;
-            if(hora>notifications.monday.time){
-                //setear en 7 dias
-                alarm = new Date(now + 7 * 86400000);
-                alarm.setHours(tsplit[0]);
-                alarm.setMinutes(tsplit[1]);
-                alarm.setSecconds(0);
-            }else{
-                //setear hoy
-                alarm = new Date();
-                alarm.setHours(tsplit[0]);
-                alarm.setMinutes(tsplit[1]);
-                alarm.setSecconds(0);
-            }
-        }else if(wday > tday){
-            //setear en fecha + tday-wday
-            alarm = new Date(now  + ((tday - wday) * 86400000));
-            alarm.setHours(tsplit[0]);
-            alarm.setMinutes(tsplit[1]);
-            alarm.setSecconds(0);
-        }else{
-            //wday - tday +7
-            alarm = new Date(now  + ((tday - wday) * 86400000));
-            alarm.setHours(tsplit[0]);
-            alarm.setMinutes(tsplit[1]);
-            alarm.setSecconds(0);
-        }
-        var row = Math.floor(Math.random() * quotesCant) + 1;
-        alert(alarm.toJSON());
-        window.plugin.notification.local.add({
-            id:      tday,
-            title:   'Workout',
-            message: $('#motivation-quotes .ui-content .quotes p#quote-'+row).text(),
-            repeat:  'weekly',
-            date:    alarm
-        }); 
+            date:    _alarm
+        });
     }
 }
 function closeNotificationPopup(){
