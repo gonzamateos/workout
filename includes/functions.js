@@ -431,7 +431,7 @@ function setUpNotification(now, hora, wday, tday, savedNotification){
             _alarm.setSeconds(0);
         }
         var row = Math.floor(Math.random() * quotesCant) + 1;
-        alert('setted: '+tday+' > '+_alarm.toLocaleString()+' > '+$('#motivation-quotes .ui-content .quotes p#quote-'+row).text())
+        //alert('setted: '+tday+' > '+_alarm.toLocaleString()+' > '+$('#motivation-quotes .ui-content .quotes p#quote-'+row).text())
         window.plugin.notification.local.add({
             id:      tday,
             title:   'Workout',
@@ -523,4 +523,45 @@ function getCurDate(){
         sc = '0'+sc;
     }
     return year+'-'+month+'-'+day+' '+hs + ":" + mn + ":" + sc;
+}
+/*get photos*/
+function photoProfile(){
+    getPhoto();
+}
+
+function getPhoto(){
+    alert('getPhoto()');
+    /*
+    navigator.camera.getPicture(uploadPhoto, onFail, { 
+        destinationType: destinationType.FILE_URI,
+        quality: 50,
+        targetWidth: 1024,
+        targetHeight: 768,
+        sourceType: pictureSource
+    });*/
+    navigator.camera.getPicture(onSuccess, onFail, { 
+        /* quality: 50,
+           destinationType: Camera.DestinationType.DATA_URL*/
+        destinationType: destinationType.FILE_URI,
+        quality: 50,
+        targetWidth: 1024,
+        targetHeight: 768,
+        sourceType: pictureSource
+        /*
+            quality: 40,
+            destinationType: navigator.camera.DestinationType.FILE_URI,
+            correctOrientation: true,
+            saveToPhotoAlbum: true,
+            encodingType: navigator.camera.EncodingType.PNG,
+            targetWidth: divWidth
+         */
+    });
+}
+function onSuccess(imageData) {
+    var image = document.getElementById('profile-photo');
+    image.src = "data:image/jpeg;base64," + imageData;
+}
+
+function onFail(message) {
+    alert('Failed because: ' + message);
 }

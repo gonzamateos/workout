@@ -12,6 +12,9 @@ var inWorkout = false;
 /* For Settings */
 var profile;
 var notifications = null;
+/* Photos */
+var pictureSource;
+var destinationType;
 
 /* etc */
 var popup_opened;
@@ -49,7 +52,11 @@ function onDeviceReady() {
     loadNotifications();
     eventListener();
     videoPlayer = document.getElementById("wvideo");
-    rotateRefresh();   
+    rotateRefresh();  
+        
+    /*camera*/
+    pictureSource = navigator.camera.PictureSourceType.SAVEDPHOTOALBUM;
+    destinationType=navigator.camera.DestinationType;
 }
 function backfunction(e){
     
