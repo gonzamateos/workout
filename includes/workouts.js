@@ -3,15 +3,16 @@ var workouts = {
         title: 'Warmup',
         exercices: {
             0: {
-                title: 'Jump rope session',
-                video: 'videos/warmup/1.m4v',
+                title: 'Jump rope session...',
+                video: 'videos/4_mp4_h264_con_web_optimized.mp4',
+                //video: 'videos/warmup/1.m4v',
                 sets: [3, 3, 4, 5, 6, 7],
                 reps: [],
                 desc: '<p>When you long for a good workout but are short on time, a little jump rope session will get your heart rate and body temperature up, putting you smack-dab in the fat-burning zone.</p>'
             },
             1: {
-                title: 'Jumping Jack',
-                video: 'videos/warmup/2.mp4',
+                title: 'Jumping Jack...',
+                video: 'videos/2.mp4',
                 sets: [3, 3, 3, 3, 3, 3],
                 reps: ['30 sec', '30 sec', '30 sec', '30 sec', '30 sec', '30 sec'],
                 desc: '<p>Assume an erect position, with feet together and arms at your side. Slightly bend your knees, and propel yourself a few inches into the air. While in air, bring your legs out to the side about shoulder width or slightly wider. As you are moving your legs outward, you should raise your arms up over your head; arms should be slightly bent throughout the entire in-air movement. Your feet should land shoulder width or wider as your hands meet above your head with arms slightly bent.</p>'
@@ -57,15 +58,16 @@ var workouts = {
         title: 'Abs',
         exercices: {
             0: {
-                title: 'Jump rope session',
-                video: 'videos/abs/1.m4v',
+                title: 'Jump rope session...',
+                video: 'videos/2.ogv',
+                //video: 'videos/warmup/1.m4v',
                 sets: [3, 3, 4, 5, 6, 7],
                 reps: [],
                 desc: '<p>When you long for a good workout but are short on time, a little jump rope session will get your heart rate and body temperature up, putting you smack-dab in the fat-burning zone.</p>'
             },
             1: {
-                title: 'Jumping Jack',
-                video: 'videos/abs/2.m4v',
+                title: 'Jumping Jack...',
+                video: 'videos/2.webm',
                 sets: [3, 3, 3, 3, 3, 3],
                 reps: ['30 sec', '30 sec', '30 sec', '30 sec', '30 sec', '30 sec'],
                 desc: '<p>Assume an erect position, with feet together and arms at your side. Slightly bend your knees, and propel yourself a few inches into the air. While in air, bring your legs out to the side about shoulder width or slightly wider. As you are moving your legs outward, you should raise your arms up over your head; arms should be slightly bent throughout the entire in-air movement. Your feet should land shoulder width or wider as your hands meet above your head with arms slightly bent.</p>'

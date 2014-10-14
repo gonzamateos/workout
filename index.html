@@ -21,6 +21,7 @@
     
     <script src="phonegap.js" type="text/javascript"></script>
     <script src="includes/dbcontroller.js" type="text/javascript"></script>
+    <script src="includes/photos.js" type="text/javascript"></script>
     <script src="includes/workouts.js" type="text/javascript"></script>
     <script src="includes/functions.js" type="text/javascript"></script>
     <script src="includes/init.js" type="text/javascript"></script>
@@ -34,9 +35,16 @@
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content">
-            <p onclick="photoProfile();"><img src="images/profile/default.png" alt="Foto" id="profile-photo" /></p>
-            <p class="profile-name">Workout</p>
-            <p class="profile-level">Level 1</p>
+            <div onclick="photoProfile();" class="profile">
+                <img src="images/mascara.png" alt="Foto" id="profile-expand" />
+                <img src="images/profile/default.jpg" alt="Foto" id="profile-photo" />
+                <img src="images/mascara.png" alt="Foto" id="profile-mask" />
+                <p>
+                    <span class="profile-name">Workout</span>
+                    <br />
+                    <span class="profile-level">Level 1</span>
+                </p>
+            </div>
 	</div><!-- /content -->
 
 	<div class="loadmenu">
@@ -155,7 +163,9 @@
             <table cellpadding="0" cellspacing="0" border="collapse">
                 <tr>
                     <td width="8%" class="prev"><a href="#nogo" class="prev">Prev &lt;</a></td>
-                    <td width="84%"><video autoplay="autoplay" id="wvideo"><source src="videos/abs/1.m4v" /></video></td>
+                    <td width="84%">
+                        <video autoplay="autoplay" id="wvideo"><source src="videos/abs/1.m4v" /></video>
+                    </td>
                     <td width="8%" class="next"><a href="#nogo" class="next">Next &gt;</a></td>
                 </tr>
             </table>
@@ -198,9 +208,9 @@
 
 	<div role="main" class="ui-content">
             <h3>Session time</h3>
-            <p>25<span class="unit">.min</span></p>
+            <p class="wtime">0<span class="unit">.min</span></p>
             <h3>Calories burned</h3>
-            <p>300<span class="unit">.Cal</span></p>
+            <p class="wcals">0<span class="unit">.Cal</span></p>
 	</div><!-- /content -->
 
         <div class="loadmenu">
@@ -215,9 +225,9 @@
 
 	<div role="main" class="ui-content">
             <h3>Week total time</h3>
-            <p>57<span class="unit">.min</span></p>
+            <p class="wtime">0<span class="unit">.min</span></p>
             <h3>Calories burned</h3>
-            <p>620<span class="unit">.Cal</span></p>
+            <p class="wcals">0<span class="unit">.Cal</span></p>
 	</div><!-- /content -->
 
         <div class="loadmenu">
@@ -231,9 +241,9 @@
 
 	<div role="main" class="ui-content">
             <h3>Month total time</h3>
-            <p>03:16<span class="unit">.hs</span></p>
+            <p class="wtime">0<span class="unit">.min</span></p>
             <h3>Calories burned</h3>
-            <p>2361<span class="unit">.Cal</span></p>
+            <p class="wcals">0<span class="unit">.Cal</span></p>
 	</div><!-- /content -->
 
         <div class="loadmenu">
@@ -248,9 +258,9 @@
 
 	<div role="main" class="ui-content">
             <h3>Total time</h3>
-            <p>06:24<span class="unit">.hs</span></p>
+            <p class="wtime">0<span class="unit">.min</span></p>
             <h3>Calories burned</h3>
-            <p>4987<span class="unit">.Cal</span></p>
+            <p class="wcals">0<span class="unit">.Cal</span></p>
 	</div><!-- /content -->
 
         <div class="loadmenu">
@@ -263,21 +273,6 @@
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content text">
-	</div><!-- /content -->
-
-        <div class="loadmenu">
-	</div><!-- /footer -->
-</div><!-- /page -->
-
-<div data-role="page" id="motivation-quotes" class="mypage">
-
-	<div data-role="header">
-		<h1>Motivation Quotes</h1>
-	</div><!-- /header -->
-
-	<div role="main" class="ui-content">
-            <div class="quotes"></div>
-            <p><a href="#nogo" id="motivationrefresh" class="refresh">Refresh</a></p>
 	</div><!-- /content -->
 
         <div class="loadmenu">

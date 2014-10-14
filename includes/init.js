@@ -10,13 +10,12 @@ var curWorkout = 0;
 var curEx = 0;
 var inWorkout = false;
 /* For Settings */
+var profile_img = '';
 var profile;
 var notifications = null;
-/* Photos */
-var pictureSource;
-var destinationType;
 
 /* etc */
+var onweb = false;
 var popup_opened;
 var videoPlayer;
 
@@ -31,15 +30,6 @@ function onDeviceReady() {
     $.mobile.allowCrossDomainPages = true;
     $.mobile.defaultPageTransition   = 'slide';
 
-    /* Updates *********************************************************************************
-    if(navigator.connection.type!=Connection.NONE){
-            console.log("Móvil online. Actualizar...");
-    }else{
-            console.log("Móvil offline...");
-    }/**/
-
-
-    popup_opened=false;
     /* Insert Inicial*/
     dbController = new DBController();
     dbController.init("workout");
@@ -51,12 +41,9 @@ function onDeviceReady() {
     loadProfile();
     loadNotifications();
     eventListener();
-    videoPlayer = document.getElementById("wvideo");
     rotateRefresh();  
-        
-    /*camera*/
-    pictureSource = navigator.camera.PictureSourceType.SAVEDPHOTOALBUM;
-    destinationType=navigator.camera.DestinationType;
+    videoPlayer = document.getElementById("wvideo");
+    
 }
 function backfunction(e){
     
@@ -90,9 +77,10 @@ function loadMenu(){
             +'        <a href="#nogo" class="workout-random">Random workout</a>'
             +'        <a href="#nogo" class="strech">Strech</a>'
             +'        <a href="#nogo" class="leave">Leave training</a>'
+            +'        <a href="#nogo" class="empty">&nbsp;</a>'
             +'    </div>'
             +'    <div class="statistics">'
-            +'        <a href="#statistics-sesion" class="statistics-sesion">Estadistica sesion actual</a>'
+            +'        <a href="#statistics-sesion" class="statistics-sesion">Sesion actual</a>'
             +'        <a href="#statistics-week" class="statistics-week">Acumulado semanal</a>'
             +'        <a href="#statistics-month" class="statistics-month">Acumulado mensual</a>'
             +'        <a href="#statistics-total" class="statistics-total">Acumulado total</a>'
@@ -100,6 +88,7 @@ function loadMenu(){
             +'    <div class="tips">'
             +'        <a href="#tips" class="tips">Tips</a>'
             +'        <a href="#motivation-quotes" class="motivation-quotes">Motivation quotes</a>'
+            +'        <a href="#nogo" class="empty">&nbsp;</a>'
             +'    </div>'
             +'    <div class="configuration">'
             +'        <a href="#set-notification" class="set-notification">Set notification</a>'

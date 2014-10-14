@@ -97,6 +97,106 @@ function eventListener(){
         return false;
     });
     
+    $( "#home" ).on( "pagebeforeshow", function( event, ui ) {
+        correctProfileImg();
+    });
+    $( "#statistics-sesion" ).on( "pagebeforeshow", function( event, ui ) {
+    
+        var query = "SELECT stats.mysession_id, SUM(`segs`) as wtime FROM stats GROUP BY stats.mysession_id  ORDER BY stats.mysession_id DESC LIMIT 1";
+        //mylog(query);
+        db.transaction(function(tx){
+            tx.executeSql(query, [], function(tx, results){
+                if(results.rows.length > 0){
+                    console.log(results.rows.item(0));
+                    var wtime = results.rows.item(0).wtime;
+                    if(wtime<60){
+                        $('#statistics-sesion .wtime').html(wtime+'<span class="unit">.segs</span>');
+                    }else{
+                        if(wtime<3600){
+                            $('#statistics-sesion .wtime').html(Math.floor(wtime/60)+':'+Math.floor(wtime%60)+'<span class="unit">.min</span>');
+                        }else{
+                            $('#statistics-sesion .wtime').html(Math.floor(wtime/3600)+':'+Math.floor((wtime%3600)/60)+':'+Math.floor((wtime%3600)%60)+'<span class="unit">.hours</span>');
+                        }
+                    }
+                }
+
+            }, errorCB);
+        }, errorCB);
+    });
+    $( "#statistics-week" ).on( "pagebeforeshow", function( event, ui ) {
+        var d = new Date();
+        var from = d.setDate(d.getDate()-d.getDay());
+        from = formatDate(from);
+        var query = "SELECT SUM(`segs`) as wtime FROM stats WHERE stats.enddate>='"+from+" 00:00:00'";
+        console.log(query);
+        db.transaction(function(tx){
+            tx.executeSql(query, [], function(tx, results){
+                if(results.rows.length > 0){
+                    console.log(results.rows.item(0));
+                    var wtime = results.rows.item(0).wtime;
+                    if(wtime<60){
+                        $('#statistics-week .wtime').html(wtime+'<span class="unit">.segs</span>');
+                    }else{
+                        if(wtime<3600){
+                            $('#statistics-week .wtime').html(Math.floor(wtime/60)+':'+Math.floor(wtime%60)+'<span class="unit">.min</span>');
+                        }else{
+                            $('#statistics-week .wtime').html(Math.floor(wtime/3600)+':'+Math.floor((wtime%3600)/60)+':'+Math.floor((wtime%3600)%60)+'<span class="unit">.hours</span>');
+                        }
+                    }
+                }
+
+            }, errorCB);
+        }, errorCB);
+    });
+    
+    $( "#statistics-month" ).on( "pagebeforeshow", function( event, ui ) {
+        var d = new Date();
+        var query = "SELECT SUM(`segs`) as wtime FROM stats WHERE stats.curmonth="+(d.getMonth()+1);
+        console.log(query);
+        //mylog(query);
+        db.transaction(function(tx){
+            tx.executeSql(query, [], function(tx, results){
+                if(results.rows.length > 0){
+                    console.log(results.rows.item(0));
+                    var wtime = results.rows.item(0).wtime;
+                    if(wtime<60){
+                        $('#statistics-month .wtime').html(wtime+'<span class="unit">.segs</span>');
+                    }else{
+                        if(wtime<3600){
+                            $('#statistics-month .wtime').html(Math.floor(wtime/60)+':'+Math.floor(wtime%60)+'<span class="unit">.min</span>');
+                        }else{
+                            $('#statistics-month .wtime').html(Math.floor(wtime/3600)+':'+Math.floor((wtime%3600)/60)+':'+Math.floor((wtime%3600)%60)+'<span class="unit">.hours</span>');
+                        }
+                    }
+                }
+
+            }, errorCB);
+        }, errorCB);
+    });
+    
+    $( "#statistics-total" ).on( "pagebeforeshow", function( event, ui ) {
+    
+        var query = "SELECT SUM(`segs`) as wtime FROM stats";
+        //mylog(query);
+        db.transaction(function(tx){
+            tx.executeSql(query, [], function(tx, results){
+                if(results.rows.length > 0){
+                    console.log(results.rows.item(0));
+                    var wtime = results.rows.item(0).wtime;
+                    if(wtime<60){
+                        $('#statistics-total .wtime').html(wtime+'<span class="unit">.segs</span>');
+                    }else{
+                        if(wtime<3600){
+                            $('#statistics-total .wtime').html(Math.floor(wtime/60)+':'+Math.floor(wtime%60)+'<span class="unit">.min</span>');
+                        }else{
+                            $('#statistics-total .wtime').html(Math.floor(wtime/3600)+':'+Math.floor((wtime%3600)/60)+':'+Math.floor((wtime%3600)%60)+'<span class="unit">.hours</span>');
+                        }
+                    }
+                }
+
+            }, errorCB);
+        }, errorCB);
+    });
     $( "#motivation-quotes" ).on( "pagebeforeshow", function( event, ui ) {
         changeQuote();
     });
@@ -114,6 +214,14 @@ function eventListener(){
             showFooterTab('statistics');
         }else{
             hideFooterTabs();
+        }
+
+        if(inWorkout){
+            $('.strech, .leave').show();
+            $('.workout-for-today, .workout-random').hide();
+        }else{
+            $('.workout-for-today, .workout-random').show();
+            $('.strech, .leave').hide();
         }
     });
     $("#wvideo").bind('ended', function(){
@@ -199,6 +307,13 @@ function loadSession(){
     curSession = window.localStorage.getItem("curSession");
     curWorkout = window.localStorage.getItem("curWorkout");
     curEx = window.localStorage.getItem("curEx");
+    profile_img = window.localStorage.getItem("profile_img");
+    if(profile_img == '' || profile_img == 'null'){
+        profile_img = 'images/profile/default.jpg';
+        correctProfileImg();
+    }else{
+        cameraSuccess(profile_img);
+    }
 }
 
 function loadWorkout(){
@@ -208,7 +323,11 @@ function loadWorkout(){
     $('#repss').html(workouts[curWorkout].exercices[curEx].reps[0]);
     $('.explanation').html(workouts[curWorkout].exercices[curEx].desc);
     $('.explanation').prepend('<h2>'+workouts[curWorkout].exercices[curEx].title+'</h2>');
-    videoPlayer.src = workouts[curWorkout].exercices[curEx].video;
+    //videoPlayer.src = workouts[curWorkout].exercices[curEx].video;
+    //window.plugins.html5Video.initialize({
+    //    "wvideo" : workouts[curWorkout].exercices[curEx].video
+    //});
+    //alert(videoPlayer.src);
     hideFooterTabs();
     if(curWorkout>0){
         curTimestamp = Date.now();
@@ -524,44 +643,70 @@ function getCurDate(){
     }
     return year+'-'+month+'-'+day+' '+hs + ":" + mn + ":" + sc;
 }
+function formatDate(date){
+    var currentDate = new Date(date);
+    var year = currentDate.getFullYear();
+    var month = currentDate.getMonth() + 1;
+    if(month<10){
+        month = '0'+month;
+    }
+    var day = currentDate.getDate();
+    if(day<10){
+        day = '0'+day;
+    }
+    return year+'-'+month+'-'+day;
+}
 /*get photos*/
-function photoProfile(){
-    getPhoto();
-}
-
-function getPhoto(){
-    alert('getPhoto()');
-    /*
-    navigator.camera.getPicture(uploadPhoto, onFail, { 
-        destinationType: destinationType.FILE_URI,
-        quality: 50,
-        targetWidth: 1024,
-        targetHeight: 768,
-        sourceType: pictureSource
-    });*/
-    navigator.camera.getPicture(onSuccess, onFail, { 
-        /* quality: 50,
-           destinationType: Camera.DestinationType.DATA_URL*/
-        destinationType: destinationType.FILE_URI,
-        quality: 50,
-        targetWidth: 1024,
-        targetHeight: 768,
-        sourceType: pictureSource
-        /*
-            quality: 40,
-            destinationType: navigator.camera.DestinationType.FILE_URI,
-            correctOrientation: true,
+function imageProfile(){
+    //app.galleryPhoto('profile-photo');
+    navigator.camera.getPicture( cameraSuccess, cameraError, {
+            quality: 50,
+            correctOrientation:true,
+            targetWidth: 768,
+            targetHeight: 768,
+            allowEdit: true,
             saveToPhotoAlbum: true,
-            encodingType: navigator.camera.EncodingType.PNG,
-            targetWidth: divWidth
-         */
-    });
+            cameraDirection: Camera.Direction.BACK,
+            encodingType: Camera.EncodingType.JPEG,
+            sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM,
+            destinationType: Camera.DestinationType.NATIVE_URI
+        });
 }
-function onSuccess(imageData) {
+function photoProfile(){
+    //app.capturePhoto('profile-photo');
+    navigator.camera.getPicture( cameraSuccess, cameraError, {
+            quality: 50,
+            correctOrientation:true,
+            targetWidth: 768,
+            targetHeight: 768,
+            allowEdit: true,
+            saveToPhotoAlbum: true,
+            cameraDirection: Camera.Direction.BACK,
+            encodingType: Camera.EncodingType.JPEG,
+            sourceType: Camera.PictureSourceType.CAMERA ,
+            destinationType: Camera.DestinationType.NATIVE_URI
+        });
+}
+function cameraSuccess(imageURI) {
+    window.localStorage.setItem("profile_img", imageURI);
     var image = document.getElementById('profile-photo');
-    image.src = "data:image/jpeg;base64," + imageData;
+    image.src = imageURI;
+    
+    if(image.width>image.height){
+        $('#profile-photo').removeClass('vertical');
+    }else{
+        $('#profile-photo').addClass('vertical');
+    }
 }
 
-function onFail(message) {
+function cameraError(message) {
     alert('Failed because: ' + message);
+}
+function correctProfileImg(){
+    var image = document.getElementById('profile-photo');
+    if(image.width>image.height){
+        $('#profile-photo').removeClass('vertical');
+    }else{
+        $('#profile-photo').addClass('vertical');
+    }
 }

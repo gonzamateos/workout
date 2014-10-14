@@ -16,7 +16,7 @@ body {
     padding: 0px 0px 60px 0px;
     margin: 0px;
     overflow: hidden;
-    background: #f8f8f8;
+    background: #F8F8F8;
     width: 100%;
 }
 .ui-header, 
@@ -134,22 +134,57 @@ body {
 .footer-menu div a.reset-progress {
     background: url("../images/icons/reset.png") no-repeat scroll 50% top / auto 90% #ff9600;
 }
+.footer-menu div a.empty {
+    background: url("../images/icons/empty.png") no-repeat scroll 50% top / auto 90% #ff9600;
+}
 /* HOME ***************/
+#home .ui-content div.profile,
 #home .ui-content p {
     text-align: center;
     margin: .8em 0 0 0 !important;
 }
-#home .ui-content p img {
-    width: 42%;
+#home .ui-content div.profile {
+    margin-left: 5% !important;
+    width: 90%;
+    position: relative;
 }
-#home .ui-content p.profile-name {
+#home .ui-content div.profile #profile-expand {
+    width: 100%;
+}
+#home .ui-content div.profile #profile-photo{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+}
+#home .ui-content div.profile #profile-photo.vertical{
+    width: auto;
+    height: 100%;
+    margin-left: 12.5%;
+}
+#home .ui-content div.profile #profile-mask {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+}
+#home .ui-content p {
+    position: absolute;
+    top: 58%;
+    width: 100%;
+    text-align: center;
+    line-height: 1.4em;
+    font-size: 1.2em;
+}
+#home .ui-content p .profile-name {
     font-family: 'Roboto Medium';
     /*font-weight: bold !important;*/
     font-size: 1.3em;
-    margin: 0 !important;
-}
-#home .ui-content p.profile-level {
-    margin: 0 !important;
 }
 /* WORKOUTS ***********************************************************/
 #workout {
@@ -236,6 +271,15 @@ body {
     margin: 1.5em 3em;
     text-align: justify;
 }
+.text h1,
+.text h2,
+.text h3 {
+    font-family: 'Roboto Medium';
+    color: #FF9600 !important;
+    margin: 0.2em 2em;
+    text-align: left;
+    font-size: 1.4em;
+}
 #tips .ui-header,
 #congratulations .ui-header,
 #motivation-quotes .ui-header,
@@ -269,7 +313,7 @@ body {
     display: block !important;
 }
 #motivation-quotes p a.refresh {
-    background: url("../images/black-icons/double11.png") no-repeat scroll 50% 50% / 128px 128px #F8F8F8;
+    background: url("../images/double11.png") no-repeat scroll 50% 50% / 128px 128px #F8F8F8;
     display: inline-block;
     height: 128px;
     overflow: hidden;
