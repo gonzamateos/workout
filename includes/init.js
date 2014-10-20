@@ -19,12 +19,18 @@ var onweb = false;
 var popup_opened;
 var videoPlayer;
 
+var basepath_;
+var apppath_;
+
 document.addEventListener("deviceready", onDeviceReady, false);
 document.addEventListener("backbutton", backfunction, false);
 
 function onDeviceReady() {
     // Alert Bienvenida
     console.log("Este es un prototipo de la aplicación. Los datos no son reales y las funcionalidades no se encuentran implementadas.");
+    
+    //basepath_ = 'file:///storage/emulated/0/workout/';
+    
     
     /* Permisos */
     $.mobile.allowCrossDomainPages = true;
@@ -43,6 +49,11 @@ function onDeviceReady() {
     eventListener();
     rotateRefresh();  
     videoPlayer = document.getElementById("wvideo");
+    alert('test');
+    basepath_ = cordova.file.dataDirectory+'workout/';
+    apppath_ = cordova.file.applicationDirectory;
+    alert('base: '+basepath_);
+    alert('app: '+path_);
     
 }
 function backfunction(e){
@@ -57,7 +68,8 @@ function backfunction(e){
         }
     }else{
         try{
-            navigator.app.backHistory();
+            $.mobile.changePage( "#home", { allowSamePageTransition: true, transition: 'slide', reverse: true } );
+            //navigator.app.backHistory();
         }catch(e){
             console.log('Error trying back...');
         }
@@ -97,4 +109,12 @@ function loadMenu(){
             +'        <a href="#reset-progress" class="reset-progress">Reset progress</a>'
             +'    </div>'
             +'</div>');
+    
+        if(inWorkout){
+            $('.strech, .leave').show();
+            $('.workout-for-today, .workout-random').hide();
+        }else{
+            $('.workout-for-today, .workout-random').show();
+            $('.strech, .leave').hide();
+        }
 }

@@ -68,6 +68,15 @@ function eventListener(){
         
         return false;
     });
+    $(".workout-random").on("click", function() {
+        var cant = Object.keys(workouts).length-1;
+        var rnd = Math.round((Math.random()+1)*1000);
+        console.log(rnd+' % '+cant+' = '+rnd%cant);
+        curWorkout = Math.round(rnd%cant);
+        curWorkout = curWorkout+1;
+        newSession(curWorkout);
+        return false;
+    });
     $("#motivation-quotes a.refresh").on("click", function() {
         rotateSpeed = 25;
 	changeQuote();
@@ -323,7 +332,23 @@ function loadWorkout(){
     $('#repss').html(workouts[curWorkout].exercices[curEx].reps[0]);
     $('.explanation').html(workouts[curWorkout].exercices[curEx].desc);
     $('.explanation').prepend('<h2>'+workouts[curWorkout].exercices[curEx].title+'</h2>');
-    //videoPlayer.src = workouts[curWorkout].exercices[curEx].video;
+    //videoPlayer.src = basepath_ + workouts[curWorkout].exercices[curEx].video;
+    
+    var fileTransfer = new FileTransfer();
+    var uri = cordova.file.applicationDirectory+'www/'+workouts[curWorkout].exercices[curEx].video;
+    fileTransfer.download(
+        uri,
+        cordova.file.dataDirectory+workouts[curWorkout].exercices[curEx].video,
+        function(entry) {
+            console.log("download complete: " + entry.fullPath);
+            videoPlayer.src=cordova.file.dataDirectory+entry.fullPath;
+            console.log("videoPlayer.src: " + videoPlayer.src);
+        },
+        function(error) {
+            alert("download error source " + error.source + " (code: "+error.code+")");
+        }
+    );
+    
     //window.plugins.html5Video.initialize({
     //    "wvideo" : workouts[curWorkout].exercices[curEx].video
     //});
