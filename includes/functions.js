@@ -4,6 +4,26 @@ function eventListener(){
         hideFooterTabs();
         return false;
     });
+    $("#reset-progress #btnCancel").on("click", function() {
+            $.mobile.changePage( "#home", { allowSamePageTransition: true, transition: 'slide', reverse: true } );
+        return false;
+    });
+    $("#reset-progress #btnOK").on("click", function() {
+       
+        dbController.dbquery('DELETE FROM mysessions');
+        dbController.dbquery('DELETE FROM stats');
+        curTimestamp = 0;
+        curSession = 0;
+        curWorkout = 0;
+        curEx = 0;
+        window.localStorage.removeItem("curSession");
+        window.localStorage.removeItem("curWorkout");
+        window.localStorage.removeItem("curEx");
+        inWorkout = false;
+        
+        alert('Your progress was reset successfully');
+        return false;
+    });
     $(".notifications .set-time").on("click", function() {
         var $li = $(this).parent('li');
 
@@ -110,14 +130,14 @@ function eventListener(){
         correctProfileImg();
     });
     $( "#statistics-sesion" ).on( "pagebeforeshow", function( event, ui ) {
-    
-        var query = "SELECT stats.mysession_id, SUM(`segs`) as wtime FROM stats GROUP BY stats.mysession_id  ORDER BY stats.mysession_id DESC LIMIT 1";
+            //7 calorias por minuto
+        var query = "SELECT stats.mysession_id, SUM(`segs`) as wtime FROM stats GROUP BY stats.mysession_id ORDER BY stats.mysession_id DESC LIMIT 1";
         //mylog(query);
         db.transaction(function(tx){
             tx.executeSql(query, [], function(tx, results){
                 if(results.rows.length > 0){
                     console.log(results.rows.item(0));
-                    var wtime = results.rows.item(0).wtime;
+                    var wtime = results.rows.item(0).wtime*1;
                     if(wtime<60){
                         $('#statistics-sesion .wtime').html(wtime+'<span class="unit">.segs</span>');
                     }else{
@@ -142,7 +162,7 @@ function eventListener(){
             tx.executeSql(query, [], function(tx, results){
                 if(results.rows.length > 0){
                     console.log(results.rows.item(0));
-                    var wtime = results.rows.item(0).wtime;
+                    var wtime = results.rows.item(0).wtime*1;
                     if(wtime<60){
                         $('#statistics-week .wtime').html(wtime+'<span class="unit">.segs</span>');
                     }else{
@@ -167,7 +187,7 @@ function eventListener(){
             tx.executeSql(query, [], function(tx, results){
                 if(results.rows.length > 0){
                     console.log(results.rows.item(0));
-                    var wtime = results.rows.item(0).wtime;
+                    var wtime = results.rows.item(0).wtime*1;
                     if(wtime<60){
                         $('#statistics-month .wtime').html(wtime+'<span class="unit">.segs</span>');
                     }else{
@@ -191,7 +211,7 @@ function eventListener(){
             tx.executeSql(query, [], function(tx, results){
                 if(results.rows.length > 0){
                     console.log(results.rows.item(0));
-                    var wtime = results.rows.item(0).wtime;
+                    var wtime = results.rows.item(0).wtime*1;
                     if(wtime<60){
                         $('#statistics-total .wtime').html(wtime+'<span class="unit">.segs</span>');
                     }else{
@@ -226,11 +246,11 @@ function eventListener(){
         }
 
         if(inWorkout){
-            $('.strech, .leave').show();
+            $('.continue-training, .strech, .leave').show();
             $('.workout-for-today, .workout-random').hide();
         }else{
             $('.workout-for-today, .workout-random').show();
-            $('.strech, .leave').hide();
+            $('.continue-training, .strech, .leave').hide();
         }
     });
     $("#wvideo").bind('ended', function(){
@@ -725,7 +745,9 @@ function cameraSuccess(imageURI) {
 }
 
 function cameraError(message) {
-    alert('Failed because: ' + message);
+    if(message!='Camera cancelled.'){
+        alert('Failed because: ' + message);
+    }
 }
 function correctProfileImg(){
     var image = document.getElementById('profile-photo');

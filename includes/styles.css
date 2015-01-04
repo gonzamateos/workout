@@ -10,7 +10,11 @@ b, strong {
 }
 body {
     background: #BFBFBF;
-    /*font-size: 12px;*/
+}
+@media only screen and (max-width: 320px) {
+    body {
+        font-size: 12px;
+    }
 }
 .ui-content {
     padding: 0px 0px 60px 0px;
@@ -59,7 +63,11 @@ body {
     background: #FFFFFF ;
 }
 .footer-links a {
-    background: url("../images/black-icons/workout.png") no-repeat scroll 50% 50% / 26px 26px #FEFEFE;
+    background-color: #FEFEFE;
+    background-repeat: no-repeat;
+    background-size: 26px 26px;
+    background-position: 50% 50%;
+    background-image: url("../images/black-icons/workout.png");
     display: inline-block;
     height: 24px;
     overflow: hidden;
@@ -67,14 +75,23 @@ body {
     text-indent: -9999px;
     width: 23%;
 }
+@media only screen and (max-width: 320px) {
+    .footer-links a {
+        height: 20px;
+        padding-top: 8px;
+    }
+}
 .footer-links a.statistics {
-    background: url("../images/black-icons/rising.png") no-repeat scroll 50% 50% / 32px 32px #FEFEFE;
+    background-size: 32px 32px;
+    background-image: url("../images/black-icons/rising.png");
 }
 .footer-links a.tips {
-    background: url("../images/black-icons/heart.png") no-repeat scroll 50% 50% / 32px 32px #FEFEFE;
+    background-size: 32px 32px;
+    background-image: url("../images/black-icons/heart.png");
 }
 .footer-links a.configuration {
-    background: url("../images/black-icons/opciones.png") no-repeat scroll 50% 50% / 32px 32px #FEFEFE;
+    background-size: 32px 32px;
+    background-image: url("../images/black-icons/opciones.png");
 }
 .footer-links a:hover,
 .footer-links a.active {
@@ -83,7 +100,11 @@ body {
     margin-bottom: -2px;
 }
 .footer-menu div a {
-    background: url("../images/icons/workout-for-today.png") no-repeat scroll 50% top / auto 90% #ff9600;
+    background-color: #ff9600;
+    background-repeat: no-repeat;
+    background-size: auto 90%;
+    background-position: 50% top;
+    background-image: url("../images/icons/workout-for-today.png");
     color: #ffffff !important;
     display: inline-block;
     height: auto;
@@ -95,47 +116,60 @@ body {
     text-decoration: none;
     width: 45%;
 }
+
+@media only screen and (max-width: 320px) {
+    .footer-menu div a {
+        margin: 0px 2%;
+        padding: 16% 0 1% 0;
+    }
+}
 .footer-menu div a.workout-random {
-    background: url("../images/icons/random.png") no-repeat scroll 50% top / auto 90% #ff9600;
+    background-image: url("../images/icons/random.png");
 }
 .footer-menu div a.strech  {
-    background: url("../images/icons/strech2.png") no-repeat scroll 50% 10px / auto 70% #ff9600;
+    background-size: auto 70%;
+    background-position: 50% 10px;
+    background-image: url("../images/icons/strech2.png");
 }
 .footer-menu div a.leave  {
-    background: url("../images/icons/depressed.png") no-repeat scroll 50% top / auto 90% #ff9600;
+    background-image: url("../images/icons/depressed.png");
 }
 .footer-menu div a.statistics-sesion {
-    background: url("../images/icons/hoy.png") no-repeat scroll 50% top / auto 90% #ff9600;
+    background-image: url("../images/icons/hoy.png");
 }
 .footer-menu div a.statistics-week {
-    background: url("../images/icons/semanal.png") no-repeat scroll 50% top / auto 90% #ff9600;
+    background-image: url("../images/icons/semanal.png");
 }
 .footer-menu div a.statistics-month {
-    background: url("../images/icons/mensual.png") no-repeat scroll 50% top / auto 90% #ff9600;
+    background-image: url("../images/icons/mensual.png");
 }
 .footer-menu div a.statistics-total {
-    background: url("../images/icons/estadistica-total-acumulado.png") no-repeat scroll 50% top / auto 90% #ff9600;
+    background-image: url("../images/icons/estadistica-total-acumulado.png");
 }
 .footer-menu div a.tips  {
-    background: url("../images/icons/tips2.png") no-repeat scroll 50% 10px / auto 70% #ff9600;
+    background-size: auto 70%;
+    background-position: 50% 10px;
+    background-image: url("../images/icons/tips2.png");
 }
 .footer-menu div a.motivation-quotes {
-    background: url("../images/icons/motivation-quotes-3.png") no-repeat scroll 50% top / auto 90% #ff9600;
+    background-image: url("../images/icons/motivation-quotes-3.png");
 }
 .footer-menu div a.set-notification {
-    background: url("../images/icons/clock15.png") no-repeat scroll 50% top / auto 85% #ff9600;
+    background-size: auto 85%;
+    background-position: 50% top;
+    background-image: url("../images/icons/clock15-crop.png");
 }
 .footer-menu div a.options  {
-    background: url("../images/icons/controls.png") no-repeat scroll 50% top / auto 90% #ff9600;
+    background-image: url("../images/icons/controls.png");
 }
 .footer-menu div a.about  {
-    background: url("../images/icons/about.png") no-repeat scroll 50% top / auto 90% #ff9600;
+    background-image: url("../images/icons/about.png");
 }
 .footer-menu div a.reset-progress {
-    background: url("../images/icons/reset.png") no-repeat scroll 50% top / auto 90% #ff9600;
+    background-image: url("../images/icons/reset.png");
 }
 .footer-menu div a.empty {
-    background: url("../images/icons/empty.png") no-repeat scroll 50% top / auto 90% #ff9600;
+    background-image: url("../images/icons/empty.png");
 }
 /* HOME ***************/
 #home .ui-content div.profile,
@@ -240,10 +274,18 @@ body {
     margin: 0px auto;
 }
 #workout a.prev {
-    background: url("../images/lt.png") no-repeat center center / 100% auto;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: center center;
+    background-image: url("../images/lt.png");
 }
 #workout a.next {
-    background: url("../images/gt.png") no-repeat center center / 100% auto;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: center center;
+    background-image: url("../images/gt.png");
 }
 #wvideo {
     width: 100%;
@@ -286,14 +328,21 @@ body {
 #profile .ui-header,
 #reset-progress .ui-header,
 .statistics .ui-header{
-    background: url("../images/header.png") no-repeat scroll center bottom / 100% auto #FF9600!important;
+    background-color: #FF9600 !important;
+    background-repeat: no-repeat !important;
+    background-size: 100% auto !important;
+    background-position: center bottom !important;
+    background-image: url("../images/header.png") !important;
     padding: .2em 0 !important;
     border: none;
 }
 
 /* MOTIVATION QUOTES ************************************************/
 #motivation-quotes .ui-title{
-    background: url("../images/icons/motivation-quotes-3.png") no-repeat scroll center bottom / auto 69% transparent;
+    background-size: auto 69%;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-image: url("../images/icons/motivation-quotes-3.png");
     padding-bottom: 20% !important;
 }
 #motivation-quotes .quotes {
@@ -313,7 +362,11 @@ body {
     display: block !important;
 }
 #motivation-quotes p a.refresh {
-    background: url("../images/double11.png") no-repeat scroll 50% 50% / 128px 128px #F8F8F8;
+    background-color: #F8F8F8;
+    background-repeat: no-repeat;
+    background-size: 128px 128px;
+    background-position: 50% 50%;
+    background-image: url("../images/double11.png");
     display: inline-block;
     height: 128px;
     overflow: hidden;
@@ -323,7 +376,11 @@ body {
 }
 /* STATISTICS *********************************************************/
 .statistics .ui-title{
-    background: url("../images/icons/rising.png") no-repeat scroll center bottom / auto 69% transparent;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: auto 69%;
+    background-position:  center bottom;
+    background-image: url("../images/icons/rising.png");
     padding-bottom: 20% !important;
 }
 .statistics h3,
@@ -357,12 +414,20 @@ body {
 }
 /* TIPS ***************************************************************/
 #tips .ui-title{
-    background: url("../images/icons/tips2.png") no-repeat scroll center bottom / auto 69% transparent;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: auto 69%;
+    background-position:  center bottom;
+    background-image: url("../images/icons/tips2.png");
     padding-bottom: 20% !important;
 }
 /* Congratulations ****************************************************/
 #congratulations .ui-title{
-    background: url("../images/icons/championship.png") no-repeat scroll center bottom / auto 69% transparent;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: auto 69%;
+    background-position:  center bottom;
+    background-image: url("../images/icons/championship.png");
     padding-bottom: 20% !important;
 }
 #congratulations h2,
@@ -382,7 +447,11 @@ body {
 }
 /* RESET PROGRESS *******************************************************/
 #reset-progress .ui-title{
-    background: url("../images/icons/reset.png") no-repeat scroll center bottom / auto 69% transparent;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: auto 69%;
+    background-position:  center bottom;
+    background-image: url("../images/icons/reset.png");
     padding-bottom: 20% !important;
 }
 #reset-progress h2 {
@@ -392,7 +461,11 @@ body {
 }
 /* OPTIONS **************************************************************/
 #profile .ui-title{
-    background: url("../images/icons/controls.png") no-repeat scroll center bottom / auto 69% transparent;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: auto 69%;
+    background-position:  center bottom;
+    background-image: url("../images/icons/controls.png");
     padding-bottom: 20% !important;
 }
 #profile form{

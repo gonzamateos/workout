@@ -1,0 +1,10 @@
+Textos de explicaciones elongacion
+Icono app (57x57, 72x72, 114x114 y 144x144 pixeles)
+Splash (pantalla que se muestra al iniciar la app, en 320x480 y 480x800 pixeles)
+Multiplicador de calorias (no recuerdo ni encontré como calcular las calorias de acuerdo al tiempo de ejercicio que tenemos registrado)
+Pagina de calculo para cardio... de eso que no entendi como mostrar
+Organizar ejercicios
+Revisar cantidades de repeticiones y sets por nivel
+Organizar elongacion
+Texto About
+URL store para link de votar la app y lugar donde queres que lo ponga

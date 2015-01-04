@@ -1,3 +1,38 @@
+/*
+ * Buscar marca de agua handbreak
+ * dia 1: piernas, hombros, strech piernas
+ * dia 2: pecho, triceps, abdominales, strech pecho
+ * dia 3: espalda / espinales, biceps, cardio,strech yoga style
+ *  
+ *  random trae la rutina de un dia completo al azar
+ *  
+ *  ver si se puede hacer mas largas las notificaciones y mostrar el tip al entrar
+ *  
+ *  menu, sacar espacio del subrayado
+ *  arreglar linea blanca superior videos
+ *  fondo blanco videos
+ *  trancisiones videos (instalar y control de errores y tiempos de carga try catch)
+ *  header como imagenes para que tome bien las fuentes
+ *  bajar la velocidad de animacion del menu
+ *  arreglar foto de perfil
+ *  icono de las notificaciones
+ *  continue training a veces aparece aunque no estes entrenando
+ *  iconos de calorias y tiempo a la izq de los numeros
+ *  
+ *  foto perfil por defecto +plano
+ *  
+ *  a los 270 min sube de nivel (desde el ultimo cambio)
+ *  
+ *  opciones
+ *  kg + cm O libras + pulgadas
+ *  
+ *  BMI. Colores como notificaciones, resaltar el rango en el que estamos. (weighting.png)
+ *  
+ *  maximum heart rate. Tablita de colores, El calculo es el titulo, la otra col es descripcion. Resolver en una sola columna (icono corazon)
+ *  
+ */
+
+
 var workouts = {
     0: {
         title: 'Warmup',
@@ -60,7 +95,7 @@ var workouts = {
                 title: 'Jump rope session...',
                 video: 'videos/abs/1.m4v',
                 sets: [3, 3, 4, 5, 6, 7],
-                reps: [],
+                reps: [3, 3, 3, 3, 3, 3],
                 desc: '<p>When you long for a good workout but are short on time, a little jump rope session will get your heart rate and body temperature up, putting you smack-dab in the fat-burning zone.</p>'
             },
             1: {

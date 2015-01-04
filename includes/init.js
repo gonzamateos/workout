@@ -1,3 +1,4 @@
+
 /* For Quotes */
 var rotateDegrees = 0;
 var rotateSpeed = 5;
@@ -15,7 +16,7 @@ var profile;
 var notifications = null;
 
 /* etc */
-var onweb = false;
+var onweb = true;
 var popup_opened;
 var videoPlayer;
 
@@ -49,11 +50,12 @@ function onDeviceReady() {
     eventListener();
     rotateRefresh();  
     videoPlayer = document.getElementById("wvideo");
-    alert('test');
     basepath_ = cordova.file.dataDirectory+'workout/';
     apppath_ = cordova.file.applicationDirectory;
-    alert('base: '+basepath_);
-    alert('app: '+path_);
+    //alert('base: '+basepath_);
+    //alert('app: '+path_);
+    
+    correctProfileImg();
     
 }
 function backfunction(e){
@@ -87,6 +89,7 @@ function loadMenu(){
             +'    <div class="workout">'
             +'        <a href="#nogo" class="workout-for-today">Workout for today</a>'
             +'        <a href="#nogo" class="workout-random">Random workout</a>'
+            +'        <a href="#workout" class="continue-training">Continue training</a>'
             +'        <a href="#nogo" class="strech">Strech</a>'
             +'        <a href="#nogo" class="leave">Leave training</a>'
             +'        <a href="#nogo" class="empty">&nbsp;</a>'
